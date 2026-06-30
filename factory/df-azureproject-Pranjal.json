@@ -1,0 +1,15 @@
+{
+	"name": "df-azureproject-Pranjal",
+	"properties": {
+		"trustModeClaimForMi": {
+			"value": "Disabled",
+			"editable": true
+		}
+	},
+	"location": "eastus",
+	"identity": {
+		"type": "SystemAssigned",
+		"principalId": "f96c9d5b-61c0-4c00-8f8e-6b818a5f1a8b",
+		"tenantId": "88656e03-b870-4557-be82-397de2c678cd"
+	}
+}
