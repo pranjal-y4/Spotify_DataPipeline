@@ -155,7 +155,7 @@
 							{
 								"name": "cdc",
 								"value": {
-									"value": "hgfhg",
+									"value": "@activity('max_cdc').output.resultSets[0].rows[0].cdc",
 									"type": "Expression"
 								}
 							}
