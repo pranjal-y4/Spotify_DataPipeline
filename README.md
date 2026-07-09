@@ -1,4 +1,4 @@
-# Spotify End-to-End Azure Data Engineering Platform
+# End-to-End Azure Data Engineering Platform
 
 An end-to-end batch and streaming data platform on Azure. It takes a Spotify-style operational dataset from Azure SQL, moves it through a Bronze / Silver / Gold medallion lakehouse, and serves an analytics-ready star schema. The focus is on the things that make a pipeline real rather than a demo: incremental loading, backfilling, dynamic and reusable components, governance, monitoring, and CI/CD.
 
