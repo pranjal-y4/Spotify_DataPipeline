@@ -1,8 +1,8 @@
-# End-to-End Azure Data Engineering Platform
+# Spotify End-to-End Azure Data Engineering Platform
 
 An end-to-end batch and streaming data platform on Azure. It takes a Spotify-style operational dataset from Azure SQL, moves it through a Bronze / Silver / Gold medallion lakehouse, and serves an analytics-ready star schema. The focus is on the things that make a pipeline real rather than a demo: incremental loading, backfilling, dynamic and reusable components, governance, monitoring, and CI/CD.
 
-<img width="3000" height="1240" alt="architecture" src="https://github.com/user-attachments/assets/589a59a6-bd8a-4aac-9e3e-f660a82790fd" />
+<img width="3000" height="1240" alt="architecture" src="https://github.com/user-attachments/assets/2d09e4b3-3e94-4ce7-971e-21066868499e" />
 
 
 ## At a glance
@@ -157,6 +157,8 @@ Data Factory connects to Azure SQL through a linked service and lands each table
 - Everything runs inside a `ForEach` over a metadata array, so all tables load from one pipeline.
 - On failure a `Web` activity calls a Logic App that emails an alert.
 
+<img width="1440" height="822" alt="Screenshot 2026-07-09 at 7 03 44 AM" src="https://github.com/user-attachments/assets/167d72d8-702c-4c8f-a8fc-85fcabfc3db3" />
+
 ### Silver (Azure Databricks)
 
 The `silver_Dimensions` notebook reads Bronze with Autoloader and applies cleaning:
@@ -172,6 +174,8 @@ Output is written as Delta with `trigger(once=True)`, checkpointed for idempoten
 ### Gold (Delta Live Tables)
 
 The `gold_pipeline` is declarative. Each dimension has a staging view over Silver (for example `dimuser_stg`), then `create_auto_cdc_flow` builds the SCD Type 2 table with `sequence_by` picking the current record. The fact uses SCD Type 1. Expectations enforce data quality (for example non-null keys) and can warn, drop, or fail. Output lands in `spotify_cat.gold` as a star schema, with the incremental run upserting only changed rows.
+<img width="1440" height="822" alt="Screenshot 2026-07-09 at 7 04 21 AM" src="https://github.com/user-attachments/assets/607b2522-2dcc-485f-8929-0c69f48c52bd" />
+
 
 ## Running it
 
